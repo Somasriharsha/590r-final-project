@@ -81,16 +81,19 @@ ggsave(here("data", "BMI_distribution.jpg"))
 
 5. Creating a function and using it.
 ```{r}
-bmi_category <- function(x) {
-  mean_bmi <- mean(opt$BMI, na.rm = TRUE)
-  ifelse(x >= mean_bmi, 
-         "Above or Equal to Mean BMI", 
-         "Below Mean BMI")
+pd_median<- function(x,ref_vec = opt$V3.PD.avg){
+  med_v3 <- stats::median(ref_vec, na.rm = TRUE)
+  ifelse(
+    is.na(x), NA,
+    ifelse(x >= med_v3, "At/Above median V3 PD", "Below median V3 PD")
+  )
 }
-print("BMI category of the first 5 participants:")
-bmi_category(opt$BMI[1:5])
-```
 
+print("V3 PD category vs cohort median for the first 10 participants:")
+
+pd_median (opt$V3.PD.avg[1:10])
+
+```
 
 6. Inline R code - 1 pulling a statistic from a table and 1 printing something else. 
 

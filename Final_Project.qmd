@@ -25,7 +25,7 @@ This dataset contains `r nrow(opt)` participants. Of wchich, `r sum(opt$Group ==
 
 2. Creating a descriptive statistics table from the  data
 ```{r}
-#| label: tbl_summary
+#| label: tbl-one
 #| tbl-cap: "Descriptive statistics by study group"
 
 opt_table <- tbl_summary(data = opt,
@@ -55,7 +55,7 @@ stats <- list(n = nrow(opt),
 ```
 There were `r stats$n` participants in the study with a mean age of `r stats$mean_age`.
 
-@tbl-summary for the descriptive statistics of the study participants.
+Read @tbl-one for the descriptive statistics of the study participants.
 
 3. Regression model
 ```{r}
@@ -70,6 +70,7 @@ tbl_uvregression(opt,
 4.  Figure: Histogram of BMI
 ```{r}
 #| label: fig-hist
+#| message: false
 #| fig-cap: "Distribution of BMI"
 hist(opt$BMI, main = "Distribution of BMI", xlab = "BMI")
 

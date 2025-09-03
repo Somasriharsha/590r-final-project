@@ -4,9 +4,10 @@ format: html
 editor: visual
 echo: false
 ---
-## EPI 590R Final Project, Sri Harsha 
 
-1. Loading the data
+## EPI 590R Final Project, Sri Harsha
+
+1.  Loading the data
 
 ```{r}
 #| message: false
@@ -21,9 +22,11 @@ opt <- get(load(here::here("data","opt.rda")))
 opt$group_cat <- factor(opt$Group, levels = c("C", "T"), labels = c("Control", "Treatment"))
 
 ```
+
 This dataset contains `r nrow(opt)` participants. Of wchich, `r sum(opt$Group == "C")` were in the control group and `r sum(opt$Group == "T")` were in the Treatment group.
 
-2. Creating a descriptive statistics table from the  data
+2.  Creating a descriptive statistics table from the data
+
 ```{r}
 #| label: tbl-one
 #| tbl-cap: "Descriptive statistics by study group"
@@ -53,11 +56,13 @@ saveRDS(opt_table, here("data", "opt_table.rds"))
 stats <- list(n = nrow(opt),
               mean_age = mean(opt$Age))
 ```
+
 There were `r stats$n` participants in the study with a mean age of `r stats$mean_age`.
 
 Read @tbl-one for the descriptive statistics of the study participants.
 
-3. Regression model
+3.  Regression model
+
 ```{r}
 tbl_uvregression(opt, 
   y = Prev.preg,
@@ -68,6 +73,7 @@ tbl_uvregression(opt,
 ```
 
 4.  Figure: Histogram of BMI
+
 ```{r}
 #| label: fig-hist
 #| message: false
@@ -77,9 +83,11 @@ hist(opt$BMI, main = "Distribution of BMI", xlab = "BMI")
 ggsave(here("data", "BMI_distribution.jpg"))
 
 ```
+
 @fig-hist for the BMI distribution of the study participants.
 
-5. Creating a function and using it.
+5.  Creating a function and using it.
+
 ```{r}
 yes_rate <- function(x, success = "Yes", include_missing = FALSE) {
   n_yes   <- sum(x == success, na.rm = TRUE)
@@ -90,7 +98,7 @@ yes_rate <- function(x, success = "Yes", include_missing = FALSE) {
 yes_rate(opt$Diabetes)
 ```
 
-6. Inline R code - 1 pulling a statistic from a table and 1 printing something else. 
+6.  Inline R code - 1 pulling a statistic from a table and 1 printing something else.
 
 ```{r}
 edc_total_yes <- gtsummary::inline_text(
@@ -106,8 +114,9 @@ alc_yes_treat <- gtsummary::inline_text(
 )
 
 ```
-Overall, `r edc_total_yes` completed essential dental care.  
-In the control group, BMI was `r bmi_control`.  
+
+Overall, `r edc_total_yes` completed essential dental care.\
+In the control group, BMI was `r bmi_control`.
 
 Among treatment participants, alcohol use “Yes” was `r alc_yes_treat`.
 

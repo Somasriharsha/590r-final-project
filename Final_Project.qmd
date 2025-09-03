@@ -87,7 +87,7 @@ yes_rate <- function(x, success = "Yes", include_missing = FALSE) {
   paste(success, ": ", n_yes, " of ", n_denom, sep = "")
 }
 
-yes_rate(opt$Diabetes)    
+yes_rate(opt$Diabetes)
 ```
 
 6. Inline R code - 1 pulling a statistic from a table and 1 printing something else. 

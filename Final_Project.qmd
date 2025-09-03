@@ -81,18 +81,13 @@ ggsave(here("data", "BMI_distribution.jpg"))
 
 5. Creating a function and using it.
 ```{r}
-pd_median<- function(x,ref_vec = opt$V3.PD.avg){
-  med_v3 <- stats::median(ref_vec, na.rm = TRUE)
-  ifelse(
-    is.na(x), NA,
-    ifelse(x >= med_v3, "At/Above median V3 PD", "Below median V3 PD")
-  )
+yes_rate <- function(x, success = "Yes", include_missing = FALSE) {
+  n_yes   <- sum(x == success, na.rm = TRUE)
+  n_denom <- if (include_missing) length(x) else sum(!is.na(x))
+  paste(success, ": ", n_yes, " of ", n_denom, sep = "")
 }
 
-print("V3 PD category vs cohort median for the first 10 participants:")
-
-pd_median (opt$V3.PD.avg[1:10])
-
+yes_rate(opt$Diabetes)    
 ```
 
 6. Inline R code - 1 pulling a statistic from a table and 1 printing something else. 
